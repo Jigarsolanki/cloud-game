@@ -14,7 +14,7 @@ define(['backbone', 'underscore'], function (Backbone, Un) {
       throw ('Not Implemented!');
     },
     processRequest: function (request) {
-      this.enqueue(request);
+      request.setDestination(this.getNextDestination());
     },
     enqueue: function (request) {
       console.log('adkjfafadljf');
@@ -32,12 +32,6 @@ define(['backbone', 'underscore'], function (Backbone, Un) {
           request.setDestination(this.getNextDestination());
         }
       }
-    },
-    start: function () {
-      console.log('started');
-      setInterval(_.bind(function() {
-        this.dequeue();
-      }, this), 50);
     }
   });
 
