@@ -56,7 +56,6 @@ define(
 
         loadbalancer = new Loadbalancer({ x: 600, y: this.canvas.height * Math.random() });
         loadbalancerComponent = new LoadbalancerComponent({model: loadbalancer, stage: this.stage});
-        debugger;
         loadbalancer.addNodes(this.getAllServers());
 
         this.addEntity(loadbalancer);
