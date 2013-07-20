@@ -8,8 +8,8 @@ define(['backbone', 'underscore'], function (Backbone, Un) {
       priority: 0,
       type: '',
       cost: 0,
-      currentCapacity: 0,
       throughputCapacity: 20,
+      percentCapacity: 0,
       game: null
     },
     requestsLastMinute: [],
@@ -34,12 +34,11 @@ define(['backbone', 'underscore'], function (Backbone, Un) {
         this.requestsLastMinute.splice(0, indexOfTooOld);
       }
 
-      this.set('currentCapacity', this.requestsLastMinute.length);
+      this.set('percentCapacity', this.requestsLastMinute.length / this.get('throughputCapacity') * 100);
     },
     start: function () {
       setInterval(_.bind(function(){
         this.updateCapacity();
-        console.log(this.requestsLastMinute);
       }, this), 1000);
       
     }
