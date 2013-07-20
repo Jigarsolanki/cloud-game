@@ -33,15 +33,6 @@ define(
 
         this.requestContainer = new RequestContainer({ stage: this.stage }).get();
 
-        // server1 = new Server({ x: 400, y: 200 });
-        // serverComponent1 = new ServerComponent({model: server1, stage: this.stage});
-
-        // lb1 = new Loadbalancer({ x: 200, y: 200 });
-        // lb1.addNode(server1);
-        // lbComponent1 = new LoadbalancerComponent({ model: lb1, stage: this.stage });
-
-        //this.firstDestination = lb1;
-
         this.bindButtons();
         this.start();
       },
@@ -49,16 +40,56 @@ define(
         $('#add_server').on('click', _.bind(function () {
           this.addServer();
         }, this));
+        $('#add_loadbalancer').on('click', _.bind(function () {
+          this.addLoadbalancer();
+        }, this));
       },
       addServer: function () {
         var server, serverComponent;
 
         server = new Server({ x: 600, y: this.canvas.height * Math.random() });
         serverComponent = new ServerComponent({model: server, stage: this.stage});
-        if (this.entities.length === 0) {
-          this.firstDestination = server;
-          this.entities.push(server);
+        this.addEntity(server);
+      },
+      addLoadbalancer: function () {
+        var loadbalancer, loadbalancerComponent, servers;
+
+        loadbalancer = new Loadbalancer({ x: 600, y: this.canvas.height * Math.random() });
+        loadbalancerComponent = new LoadbalancerComponent({model: loadbalancer, stage: this.stage});
+        debugger;
+        loadbalancer.addNodes(this.getAllServers());
+
+        this.addEntity(loadbalancer);
+      },
+      addEntity: function (newEntity) {
+        var highestPriorityEntity, highestPriorityEntityValue;
+
+        highestPriorityEntityValue = 0;
+
+        this.entities.push(newEntity);
+        if (this.entities.length === 1) {
+          this.firstDestination = newEntity;
+        } else {
+          this.entities.forEach(function (entity) {
+            if (highestPriorityEntityValue <= entity.get('priority')) {
+              highestPriorityEntityValue = entity.get('priority');
+              highestPriorityEntity = entity;
+            }
+          });
+          this.firstDestination = highestPriorityEntity;
         }
+      },
+      getAllServers: function () {
+        var servers;
+
+        servers = [];
+        this.entities.forEach(function (entity) {
+          if(entity.get('priority') === 0) {
+            servers.push(entity);
+          }
+        });
+
+        return servers;
       },
       start: function () {
         this.particleTimer = setInterval(_.bind(function () {

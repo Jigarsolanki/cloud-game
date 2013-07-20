@@ -4,7 +4,9 @@ define(['backbone'], function (Backbone) {
   Entity = Backbone.Model.extend({
     defaults: {
       x: 0,
-      y: 0
+      y: 0,
+      priority: 0,
+      type: ''
     },
     getNextDestination: function () {
       throw ('Not Implemented!');

@@ -9,7 +9,7 @@ define(
       intImage: function() {
         this.image = new Image();
         this.image.onload = _.bind(this.onLoaded, this);
-        this.image.src = '/public/images/server.png';
+        this.image.src = '/public/images/cloud_server.png';
         this.image.server = this.model;
       }
     });
