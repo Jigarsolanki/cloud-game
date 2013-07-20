@@ -43,7 +43,7 @@ define(
         return 20;  //randInRange(1, 2);
       },
       randomColor: function () {
-        var r = Math.random()*255>>0;
+        var r = Math.random() *255>>0;
         var g = Math.random()*255>>0;
         var b = Math.random()*255>>0;
         return "rgba("+r+", "+g+", "+b+", 1)";

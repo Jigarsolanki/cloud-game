@@ -7,29 +7,28 @@ define(
 
     Request = Backbone.Model.extend({
       defaults: {
-        timeout: 0,
-        timeTaken: 0,
-        color: null,
-        entity: null,
+        x: 0,
+        y: 0,
+        speedX: 0,
+        speedY: 0
       },
-      value: function () {
-        var time;
+      destination: null,
+      setDestination: function (newDestination) {
+        this.destination = newDestination;
 
-        time = this.get('timeTaken') - this.get('timeout');
-        if (time < 0) {
-            return 0;
+        if (newDestination) {
+          this.set('speedX', (newDestination.get('x') - this.get('x')) / 30);
+          this.set('speedY', (newDestination.get('y') - this.get('y')) / 30);
         }
-        return time * 100;
       },
-      complete: function () {
-        Player1.money += this.value();
+      getDestination: function () {
+        return this.destination;
       },
-      update: function () {
-        //Called only when a request should hit a new entity
-        var nextEntity;
-
-        this.set('timeTaken', this.get('timeTaken') + this.get('entity').get('timeDrain'))
-        nextEntity = this.get('entity').getNextEntity()
+      move: function () {
+        newX = this.get('speedX') + this.get('x');
+        newY = this.get('speedY') + this.get('y');
+        this.set('x', newX);
+        this.set('y', newY);
       }
     });
 
