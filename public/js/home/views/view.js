@@ -26,6 +26,7 @@ define(
       requestComponents: [],
       entities: [],
       game: null,
+      requestGenerationTime: 200,
       initialize: function() {
         this.render();
       },
@@ -140,8 +141,6 @@ define(
         highestPriorityEntityValue = 0;
         highestPriorityEntity = null;
 
-        // this.entities.push(newEntity);
-
         indexOfRemovedEntity = 0;
         for(var x = 0 ; x < this.entities.length; x++) {
           if(this.entities[x].cid === removedEntity.cid) {
@@ -186,12 +185,21 @@ define(
 
         return servers;
       },
-      start: function () {
-        this.particleTimer = setInterval(_.bind(function () {
-          if (this.firstDestination) {
+      generateRequest: function () {
+        if (this.firstDestination) {
             this.addRequest();
           }
-        }, this), 200);
+      },
+      start: function () {
+        var requestGenerationTimer;
+
+        requestGenerationTimer = setInterval(_.bind(function () {
+          if(this.particleTimer) {
+            clearInterval(this.particleTimer);
+            this.requestGenerationTime -= 5;
+          }
+          this.particleTimer = setInterval(_.bind(this.generateRequest, this), this.requestGenerationTime);
+        }, this), 2000);
 
         createjs.Ticker.addListener(_.bind(function() {
           this.update();
