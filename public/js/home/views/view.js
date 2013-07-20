@@ -221,6 +221,7 @@ define(
         requestComponent = new RequestComponent({model: request, requestContainer: this.requestContainer});
         this.requestComponents.push(requestComponent);
         this.game.set({'totalRequests': this.game.get('totalRequests') + 1});
+        this.sounds.play('money');
       },
       update: function () {
         var x, y;

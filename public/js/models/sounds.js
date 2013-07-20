@@ -9,7 +9,8 @@ define(
       defaults: {
         types: {
           'destroyEntity': new Audio("/public/sounds/destroy_entity.wav"),
-          'buildEntity': new Audio("/public/sounds/build_entity.wav")
+          'buildEntity': new Audio("/public/sounds/build_entity.wav"),
+          'money': new Audio("/public/sounds/money.wav")
         }
       },
       play: function (soundName) {
