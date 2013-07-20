@@ -1,4 +1,4 @@
-define(['backbone'], function (Backbone) {
+define(['backbone', 'underscore'], function (Backbone, Un) {
   var Entity;
 
   Entity = Backbone.Model.extend({
@@ -8,11 +8,29 @@ define(['backbone'], function (Backbone) {
       priority: 0,
       type: ''
     },
+    queue: [],
     getNextDestination: function () {
       throw ('Not Implemented!');
     },
     processRequest: function (request) {
-      request.setDestination(this.getNextDestination());
+      this.enqueue(request);
+      request.setDestination(this);
+    },
+    enqueue: function (request) {
+      this.queue.push(request);
+    },
+    dequeue: function () {
+      var request;
+
+      request = this.queue.shift();
+      if(request) {
+        request.setDestination(this.getNextDestination());
+      }
+    },
+    start: function () {
+      setTimeout(_.bind(function() {
+        this.dequeue();
+      }, this), 200);
     }
   });
 

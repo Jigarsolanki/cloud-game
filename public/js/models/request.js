@@ -30,13 +30,11 @@ define(
         newY = this.get('speedY') + this.get('y');
         this.set('x', newX);
         this.set('y', newY);
-
       },
       isExpired: function () {
         var currentTime;
 
         currentTime = new Date().getTime();
-            debugger;
         return ((currentTime - this.get('startTime')) > 10000)
       }
     });
