@@ -45,20 +45,27 @@ define(
         }, this));
       },
       addServer: function () {
-        var server, serverComponent;
+        var server, serverComponent, allLoadbalancers;
 
         server = new Server({ x: 600, y: this.canvas.height * Math.random() });
         serverComponent = new ServerComponent({model: server, stage: this.stage});
+
+        allLoadbalancers = this.getAllLoadbalancers();
+        debugger;
+        if(allLoadbalancers.length > 0) {
+          allLoadbalancers[0].addNode(server);
+        }
         this.addEntity(server);
       },
       addLoadbalancer: function () {
         var loadbalancer, loadbalancerComponent, servers;
 
-        loadbalancer = new Loadbalancer({ x: 600, y: this.canvas.height * Math.random() });
+        loadbalancer = new Loadbalancer({ x: 400, y: this.canvas.height * Math.random() });
         loadbalancerComponent = new LoadbalancerComponent({model: loadbalancer, stage: this.stage});
 
         loadbalancer.addNodes(this.getAllServers());
 
+        loadbalancer.addNodes(this.getAllServers());
         this.addEntity(loadbalancer);
       },
       addEntity: function (newEntity) {
@@ -78,6 +85,18 @@ define(
           });
           this.firstDestination = highestPriorityEntity;
         }
+      },
+      getAllLoadbalancers: function () {
+        var loadbalancers;
+
+        loadbalancers = [];
+        this.entities.forEach(function (entity) {
+          if(entity.get('priority') === 1) {
+            loadbalancers.push(entity);
+          }
+        });
+
+        return loadbalancers;
       },
       getAllServers: function () {
         var servers;

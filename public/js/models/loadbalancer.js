@@ -21,8 +21,6 @@ define(['./entity'], function (Entity) {
       nodes.forEach(function (node) {
         currentNodes.push(node);
       });
-
-      debugger;
     }
   });
 
