@@ -66,7 +66,7 @@ define(
 
           if (current_server !== undefined) {
             this.stage.removeChild(current_server);
-            this.removeEntity(current_server_model);
+            this.removeEntity(current_server);
           }
         }, this));
       },
@@ -203,10 +203,10 @@ define(
         requestGenerationTimer = setInterval(_.bind(function () {
           if(this.particleTimer) {
             clearInterval(this.particleTimer);
-            this.requestGenerationTime -= 2;
+            this.requestGenerationTime -= 5;
           }
           this.particleTimer = setInterval(_.bind(this.generateRequest, this), this.requestGenerationTime);
-        }, this), 10000);
+        }, this), 3000);
 
         createjs.Ticker.addListener(_.bind(function() {
           this.update();
