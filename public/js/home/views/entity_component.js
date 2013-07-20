@@ -62,6 +62,7 @@ define(
 
         bitmap.onClick = function(ev) {
           current_server = ev.target.parent;
+          current_server_model = model;
         };
 
       }

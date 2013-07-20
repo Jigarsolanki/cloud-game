@@ -18,7 +18,6 @@ define(['backbone', 'underscore'], function (Backbone, Un) {
       request.setDestination(this.getNextDestination());
     },
     enqueue: function (request) {
-      console.log('adkjfafadljf');
       if(this.queue.indexOf(request) === -1) {
         this.queue.push(request);
         request.setDestination(this);

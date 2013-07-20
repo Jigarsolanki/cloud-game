@@ -58,8 +58,11 @@ define(
           //TODO
         }, this));
         $('#delete').on('click', _.bind(function () {
+          var servers;
+
           if (current_server !== undefined) {
             this.stage.removeChild(current_server);
+            this.removeEntity(current_server_model);
           }
         }, this));
       },
@@ -120,6 +123,34 @@ define(
 
         if (this.entities.length === 1) {
           this.firstDestination = newEntity;
+        } else {
+          this.entities.forEach(function (entity) {
+            if (highestPriorityEntityValue <= entity.get('priority')) {
+              highestPriorityEntityValue = entity.get('priority');
+              highestPriorityEntity = entity;
+            }
+          });
+          this.firstDestination = highestPriorityEntity;
+        }
+      },
+      removeEntity: function (removedEntity) {
+        var highestPriorityEntity, highestPriorityEntityValue;
+
+        highestPriorityEntityValue = 0;
+        highestPriorityEntity = null;
+
+        // this.entities.push(newEntity);
+
+        indexOfRemovedEntity = 0;
+        for(var x = 0 ; x < this.entities.length; x++) {
+          if(this.entities[x].cid === removedEntity.cid) {
+            indexOfRemovedEntity = x;
+          }
+        }
+        this.entities.splice(indexOfRemovedEntity, 1);
+
+        if (this.entities.length === 0) {
+          this.firstDestination = null;
         } else {
           this.entities.forEach(function (entity) {
             if (highestPriorityEntityValue <= entity.get('priority')) {
