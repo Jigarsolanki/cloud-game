@@ -9,7 +9,7 @@ define(['backbone', 'underscore'], function (Backbone, Un) {
       type: '',
       cost: 0,
       currentCapacity: 0,
-      throughputCapacity: 20
+      throughputCapacity: 20,
       game: null
     },
     requestsLastMinute: [],
