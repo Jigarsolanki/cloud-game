@@ -221,6 +221,13 @@ define(
         for (var i = 0; i < this.requestComponents.length; i++) {
           this.requestComponents[i].move();
         }
+
+        if (typeof this.stage.bitmap_array !== 'undefined') {
+          for (var i = 0; i < this.stage.bitmap_array.length; i++) {
+            this.stage.bitmap_array[i].changeValue();
+          }
+        }
+        this.stage.update();
       }
     });
 

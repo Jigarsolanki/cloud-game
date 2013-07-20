@@ -34,7 +34,8 @@ define(['backbone', 'underscore'], function (Backbone, Un) {
         this.requestsLastMinute.splice(0, indexOfTooOld);
       }
 
-      this.set('percentCapacity', this.requestsLastMinute.length / this.get('throughputCapacity') * 100);
+      var percentCapacity = parseInt(this.requestsLastMinute.length / this.get('throughputCapacity') * 100);
+      this.set('percentCapacity', (percentCapacity > 100 ? 100 : percentCapacity));
     },
     start: function () {
       setInterval(_.bind(function(){
