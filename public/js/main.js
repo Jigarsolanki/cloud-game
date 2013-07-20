@@ -9,7 +9,8 @@ require.config({
     jquery: '/public/js/external/jquery.min',
     underscore: '/public/js/external/underscore.min',
     backbone: '/public/js/external/backbone.min',
-    text: '/public/js/external/text'
+    text: '/public/js/external/text',
+    easel: '/public/js/external/easeljs.min'
   }
 });
 

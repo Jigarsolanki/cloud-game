@@ -11,10 +11,9 @@ define([
   return {
     currentView: null,
     initialize: function () {
-      var appRouter, header;
+      var appRouter;
 
       appRouter = new AppRouter;
-      header = new HeaderView({el: $('#header')});
 
       appRouter.on('route:defaultAction', _.bind(function (actions) {
         this.currentView = new HomeView();
