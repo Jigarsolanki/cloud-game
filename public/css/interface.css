@@ -1,7 +1,12 @@
 #user-interface {
   position: absolute;
   display: inline;
-  margin-left: 15px;
+  padding: 15px 0px 0px 15px;
+  background-image: url('/public/images/menu_background.png');
+  color: white;
+  height: 585px;
+  width: 250px;
+  border-left: 3px solid gray;
 }
 
 #bank {
@@ -14,7 +19,7 @@
 }
 
 #add-server {
-  background-color: orange;
+  background-color: #FF8800;
 }
 
 #add-loadbalancer {

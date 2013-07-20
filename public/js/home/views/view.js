@@ -9,11 +9,12 @@ define(
     '../../models/request',
     '../../models/game',
     './request_component',
-    'underscore'
+    'underscore',
+    'toastr'
   ],
   function(Backbone, RequestContainer, Server, ServerComponent,
     Loadbalancer, LoadbalancerComponent, Request, Game,
-    RequestComponent, underscore) {
+    RequestComponent, underscore, toastr) {
     var View;
 
     View = Backbone.View.extend({
@@ -48,6 +49,17 @@ define(
         $('#add-loadbalancer').on('click', _.bind(function () {
           this.addLoadbalancer();
         }, this));
+        $('#upgrade-1').on('click', _.bind(function () {
+          //TODO
+        }, this));
+        $('#upgrade-2').on('click', _.bind(function () {
+          //TODO
+        }, this));
+        $('#delete').on('click', _.bind(function () {
+          if (current_server !== undefined) {
+            this.stage.removeChild(current_server);
+          }
+        }, this));
       },
       bindBank: function () {
         $('#money').text(this.game.get('money'));
@@ -72,6 +84,8 @@ define(
             }
           }
           this.addEntity(server);
+        } else {
+          toastr.error('Not enough money to buy a server!');
         }
       },
       addLoadbalancer: function () {
@@ -86,6 +100,8 @@ define(
 
           loadbalancer.addNodes(this.getAllServers());
           this.addEntity(loadbalancer);
+        } else {
+          toastr.error('Not enough money to buy a loadbalancer!');
         }
       },
       addEntity: function (newEntity) {

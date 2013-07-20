@@ -33,6 +33,8 @@ define(
         bitmap = new createjs.Bitmap(image);
         this.container.addChild(bitmap);
 
+
+
         bitmap.rotation = 0;
         bitmap.x = model.get('x');
         bitmap.y = model.get('y');
@@ -54,8 +56,14 @@ define(
             bitmap.y = ev.stageY+offset.y;
             model.set('x', bitmap.x);
             model.set('y', bitmap.y);
-          }
+          };
+
         };
+
+        bitmap.onClick = function(ev) {
+          current_server = ev.target.parent;
+        };
+
       }
     });
 
