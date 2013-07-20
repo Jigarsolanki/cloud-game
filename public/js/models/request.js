@@ -3,23 +3,14 @@ define(
     'backbone'
   ],
   function(Backbone) {
-    View = Backbone.Model.extend({
+    var Request;
 
-      timeout: 0,
-      timeTaken: 0,
-      requestType: undefined,
-
-      initialize: function() {
-        this.render();
-        this.timeout = this.options.timeout;
-        this.timeTaken = this.options.timeTaken;
-        this.requestType = this.options.requestType;
+    Request = Backbone.Model.extend({
+      defaults: {
+        timeout: 0,
+        timeTaken: 0,
+        requestType: undefined
       },
-
-      render: function() {
-        this.$el.html('Hi there!');
-      },
-
       value: function () {
         var time;
 
@@ -29,16 +20,11 @@ define(
         }
         return time * 100;
       },
-
-      completeRequest: function () {
+      complete: function () {
         Player1.money += this.value();
       }
     });
-    return View;
+
+    return Request;
   }
 );
-
-RequestType = {
-
-};
-

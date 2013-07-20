@@ -1,34 +1,20 @@
-Entity = function () {
-  return {
-    timeDrain: 0,
-    capacity: 0,
-    type: undefined,
-    cost: 0
-  };
-};
+define(['backbone'], function (Backbone) {
+  var Entity;
 
-Entity.prototype.getCost = function () {
-  return time_drain * capacity;
-};
+  Entity = Backbone.Model.extend({
+    defaults: {
+      timeDrain: 0,
+      capacity: 0,
+      entityType: undefined,
+      cost: 0
+    },
+    getCost: function () {
+      return this.time_drain * this.capacity;
+    },
+    reduceTime: function (request) {
+      this.request.timeTaken += this.timeDrain;
+    }
+  });
 
-Entity.prototype.reduceTime = function (request) {
-  request.timeTaken += timeDrain;
-};
-
-Server = {
-
-};
-
-Loadbalancer = {
-  endpoints: []
-};
-
-Gtm = {
-  sharedpoints: [],
-  endpoints: [],
-  timeBonus: 0
-};
-
-Gtm.prototype.addTime = function (request) {
-  request.timeTaken -= timeBonus;
-};
+  return Entity;
+});
