@@ -25,6 +25,7 @@ define(
       firstDestination: null,
       requestComponents: [],
       entities: [],
+      game: null,
       initialize: function() {
         this.render();
       },

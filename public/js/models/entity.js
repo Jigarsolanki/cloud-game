@@ -7,7 +7,8 @@ define(['backbone', 'underscore'], function (Backbone, Un) {
       y: 0,
       priority: 0,
       type: '',
-      cost: 0
+      cost: 0,
+      game: null
     },
     queue: [],
     getNextDestination: function () {

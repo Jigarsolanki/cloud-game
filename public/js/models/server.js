@@ -8,7 +8,15 @@ define(['./entity'], function (Entity) {
     },
     getNextDestination: function () {
       return null;
-    }
+    },
+    processRequest: function (request) {
+      var currentMoney;
+
+      Entity.prototype.processRequest.call(this, request);
+
+      currentMoney = this.get('game').get('money');
+      this.get('game').set('money', currentMoney + 1 );
+    },
   });
 
   return Server;
