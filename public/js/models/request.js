@@ -10,7 +10,8 @@ define(
         x: 0,
         y: 0,
         speedX: 0,
-        speedY: 0
+        speedY: 0,
+        startTime:  0
       },
       destination: null,
       setDestination: function (newDestination) {
@@ -29,6 +30,14 @@ define(
         newY = this.get('speedY') + this.get('y');
         this.set('x', newX);
         this.set('y', newY);
+
+      },
+      isExpired: function () {
+        var currentTime;
+
+        currentTime = new Date().getTime();
+            debugger;
+        return ((currentTime - this.get('startTime')) > 10000)
       }
     });
 
