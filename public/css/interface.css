@@ -13,6 +13,10 @@
   font-weight: bold;
 }
 
+#stats {
+  margin-bottom: 15px;
+}
+
 #add-server, #add-loadbalancer {
   color: white;
   font-weight: bold;
