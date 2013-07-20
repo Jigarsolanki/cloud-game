@@ -8,14 +8,17 @@
   font-weight: bold;
 }
 
+#add-server, #add-loadbalancer {
+  color: white;
+  font-weight: bold;
+}
+
 #add-server {
   background-color: orange;
-  color: white;
 }
 
 #add-loadbalancer {
   background-color: purple;
-  color: white;
 }
 
 #selected {

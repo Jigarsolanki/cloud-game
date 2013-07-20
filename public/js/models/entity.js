@@ -6,7 +6,8 @@ define(['backbone'], function (Backbone) {
       x: 0,
       y: 0,
       priority: 0,
-      type: ''
+      type: '',
+      cost: 0
     },
     getNextDestination: function () {
       throw ('Not Implemented!');

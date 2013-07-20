@@ -7,10 +7,13 @@ define(
     '../../models/loadbalancer',
     './loadbalancer_component',
     '../../models/request',
+    '../../models/game',
     './request_component',
     'underscore'
   ],
-  function(Backbone, RequestContainer, Server, ServerComponent, Loadbalancer, LoadbalancerComponent, Request, RequestComponent, underscore) {
+  function(Backbone, RequestContainer, Server, ServerComponent,
+    Loadbalancer, LoadbalancerComponent, Request, Game,
+    RequestComponent, underscore) {
     var View;
 
     View = Backbone.View.extend({
@@ -34,6 +37,8 @@ define(
         this.requestContainer = new RequestContainer({ stage: this.stage }).get();
 
         this.bindButtons();
+        this.game = new Game();
+        this.bindBank();
         this.start();
       },
       bindButtons: function () {
@@ -44,29 +49,44 @@ define(
           this.addLoadbalancer();
         }, this));
       },
+      bindBank: function () {
+        $('#money').text(this.game.get('money'));
+        this.game.on("change:money", function (model, value) {
+          $('#money').text(value);
+        });
+      },
       addServer: function () {
         var server, serverComponent, allLoadbalancers;
 
-        server = new Server({ x: 600, y: this.canvas.height * Math.random() });
-        serverComponent = new ServerComponent({model: server, stage: this.stage});
+        server = new Server({ x: 600, y: this.canvas.height * Math.random(), cost: 100 });
 
-        allLoadbalancers = this.getAllLoadbalancers();
+        if (this.game.spend(server.get('cost'))) {
+          serverComponent = new ServerComponent({model: server, stage: this.stage});
 
-        if(allLoadbalancers.length > 0) {
-          allLoadbalancers[0].addNode(server);
+          allLoadbalancers = this.getAllLoadbalancers();
+
+          if(allLoadbalancers.length > 0) {
+            allLoadbalancers[0].addNode(server);
+            if(allLoadbalancers.length > 0) {
+              allLoadbalancers[0].addNode(server);
+            }
+            this.addEntity(server);
+          }
         }
-        this.addEntity(server);
       },
       addLoadbalancer: function () {
         var loadbalancer, loadbalancerComponent, servers;
 
-        loadbalancer = new Loadbalancer({ x: 400, y: this.canvas.height * Math.random() });
-        loadbalancerComponent = new LoadbalancerComponent({model: loadbalancer, stage: this.stage});
+        loadbalancer = new Loadbalancer({ x: 400, y: this.canvas.height * Math.random(), cost: 125 });
 
-        loadbalancer.addNodes(this.getAllServers());
+        if (this.game.spend(loadbalancer.get('cost'))) {
+          loadbalancerComponent = new LoadbalancerComponent({model: loadbalancer, stage: this.stage});
 
-        loadbalancer.addNodes(this.getAllServers());
-        this.addEntity(loadbalancer);
+          loadbalancer.addNodes(this.getAllServers());
+
+          loadbalancer.addNodes(this.getAllServers());
+          this.addEntity(loadbalancer);
+        }
       },
       addEntity: function (newEntity) {
         var highestPriorityEntity, highestPriorityEntityValue;
