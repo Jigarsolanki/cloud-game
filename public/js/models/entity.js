@@ -15,23 +15,29 @@ define(['backbone', 'underscore'], function (Backbone, Un) {
     },
     processRequest: function (request) {
       this.enqueue(request);
-      request.setDestination(this);
     },
     enqueue: function (request) {
-      this.queue.push(request);
+      console.log('adkjfafadljf');
+      if(this.queue.indexOf(request) === -1) {
+        this.queue.push(request);
+        request.setDestination(this);
+      }
     },
     dequeue: function () {
       var request;
 
-      request = this.queue.shift();
-      if(request) {
-        request.setDestination(this.getNextDestination());
+      if (this.queue.length >= 0) {
+        request = this.queue.shift();
+        if(request) {
+          request.setDestination(this.getNextDestination());
+        }
       }
     },
     start: function () {
-      setTimeout(_.bind(function() {
+      console.log('started');
+      setInterval(_.bind(function() {
         this.dequeue();
-      }, this), 200);
+      }, this), 50);
     }
   });
 
