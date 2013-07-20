@@ -10,7 +10,8 @@ require.config({
     underscore: '/public/js/external/underscore.min',
     backbone: '/public/js/external/backbone.min',
     text: '/public/js/external/text',
-    easel: '/public/js/external/easeljs.min'
+    easel: '/public/js/external/easeljs.min',
+    toastr: '/public/js/external/toastr.min'
   }
 });
 

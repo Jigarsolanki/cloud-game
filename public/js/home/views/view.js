@@ -9,11 +9,12 @@ define(
     '../../models/request',
     '../../models/game',
     './request_component',
-    'underscore'
+    'underscore',
+    'toastr'
   ],
   function(Backbone, RequestContainer, Server, ServerComponent,
     Loadbalancer, LoadbalancerComponent, Request, Game,
-    RequestComponent, underscore) {
+    RequestComponent, underscore, toastr) {
     var View;
 
     View = Backbone.View.extend({
@@ -72,6 +73,8 @@ define(
             }
           }
           this.addEntity(server);
+        } else {
+          toastr.error('Not enough money to buy a server!');
         }
       },
       addLoadbalancer: function () {
@@ -86,6 +89,8 @@ define(
 
           loadbalancer.addNodes(this.getAllServers());
           this.addEntity(loadbalancer);
+        } else {
+          toastr.error('Not enough money to buy a loadbalancer!');
         }
       },
       addEntity: function (newEntity) {
