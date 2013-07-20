@@ -48,6 +48,17 @@ define(
         $('#add-loadbalancer').on('click', _.bind(function () {
           this.addLoadbalancer();
         }, this));
+        $('#upgrade-1').on('click', _.bind(function () {
+          //TODO
+        }, this));
+        $('#upgrade-2').on('click', _.bind(function () {
+          //TODO
+        }, this));
+        $('#delete').on('click', _.bind(function () {
+          if (current_server !== undefined) {
+            this.stage.removeChild(current_server);
+          }
+        }, this));
       },
       bindBank: function () {
         $('#money').text(this.game.get('money'));
