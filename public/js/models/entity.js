@@ -13,6 +13,10 @@ define(['backbone'], function (Backbone) {
     },
     reduceTime: function (request) {
       request.timeTaken += this.get('timeDrain');
+    },
+    getNextEntity: function () {
+      //TODO
+      return null;
     }
   });
 

@@ -9,7 +9,8 @@ define(
       defaults: {
         timeout: 0,
         timeTaken: 0,
-        requestType: undefined
+        color: null,
+        entity: null,
       },
       value: function () {
         var time;
@@ -22,6 +23,13 @@ define(
       },
       complete: function () {
         Player1.money += this.value();
+      },
+      update: function () {
+        //Called only when a request should hit a new entity
+        var nextEntity;
+
+        this.set('timeTaken', this.get('timeTaken') + this.get('entity').get('timeDrain'))
+        nextEntity = this.get('entity').getNextEntity()
       }
     });
 

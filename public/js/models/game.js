@@ -1,19 +1,42 @@
 define([
   'backbone',
   './player',
+  './level'
   ], function (Backbone, Player) {
   var Game;
 
   Game = Backbone.Model.extend({
+    requests: null,
+
     defaults: {
       stage: 0,
-      player: null
+      player: null,
+      level: null,
+      timeSinceUpdate: 0,
+      maxDiff: 0.5,
+      requests: null
     },
     initialize: function () {
-      // var level;
-      this.get('player') = new Player();
-      this.get('stage') += 1;
-      // level = new Level({'stage': stage});
+      this.set({
+        'player': new Player(),
+        'stage': 1,
+        'level': new Level({'stage': stage}),
+        'requests': level.generateRequests()
+      });
+    },
+    update: function (timedelta) {
+      timeSinceUpdate += timedelta;
+
+      if (timeSinceUpdate > this.get('maxDiff')) {
+        maxRequestsToActOn = timeSinceUpdate % this.get('maxDiff');
+        requestsToUpdate = this.get('requests').slice(0, maxRequestsToActOn);
+
+        for (var r in requestsToUpdate) {
+          r.update();
+        }
+
+        timeSinceUpdate = 0;
+      }
     }
   });
 
