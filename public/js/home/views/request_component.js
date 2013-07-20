@@ -29,22 +29,27 @@ define(
         this.requestContainer.addChild(this.shape);
       },
       randomColor: function () {
-        var r = Math.random()*255>>0;
-        var g = Math.random()*255>>0;
-        var b = Math.random()*255>>0;
+        var r = 255; //Math.random()*255>>0;
+        var g = 255; //Math.random()*255>>0;
+        var b = 255; //Math.random()*255>>0;
         return "rgba("+r+", "+g+", "+b+", 1)";
       },
       move: function () {
         var currentDestination,
-          request = this.model;
+        request = this.model;
 
-          currentDestination = request.getDestination();
+        currentDestination = request.getDestination();
+
         if (currentDestination) {
 
           request.move();
+
           this.shape.x = request.get('x');
           this.shape.y = request.get('y');
 
+          if (request.isExpired())  {
+            this.requestContainer.removeChild(this.shape);
+          };
           if(request.get('x') >= currentDestination.get('x')) {
             currentDestination.processRequest(request);
           }

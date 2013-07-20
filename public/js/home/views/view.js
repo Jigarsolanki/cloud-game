@@ -51,7 +51,7 @@ define(
         serverComponent = new ServerComponent({model: server, stage: this.stage});
 
         allLoadbalancers = this.getAllLoadbalancers();
-        debugger;
+
         if(allLoadbalancers.length > 0) {
           allLoadbalancers[0].addNode(server);
         }
@@ -112,7 +112,9 @@ define(
       },
       start: function () {
         this.particleTimer = setInterval(_.bind(function () {
-          this.addRequest();
+          if (this.firstDestination) {
+            this.addRequest();
+          }
         }, this), 200);
 
         createjs.Ticker.addListener(_.bind(function() {
@@ -123,7 +125,7 @@ define(
       addRequest: function () {
         var request;
 
-        request = new Request({x: 0, y: this.canvas.height / 2});
+        request = new Request({x: 0, y: this.canvas.height / 2, startTime: new Date().getTime()});
         request.setDestination(this.firstDestination);
         requestComponent = new RequestComponent({model: request, requestContainer: this.requestContainer});
         this.requestComponents.push(requestComponent);
