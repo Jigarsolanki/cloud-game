@@ -203,10 +203,10 @@ define(
         requestGenerationTimer = setInterval(_.bind(function () {
           if(this.particleTimer) {
             clearInterval(this.particleTimer);
-            this.requestGenerationTime -= 5;
+            this.requestGenerationTime -= 2;
           }
           this.particleTimer = setInterval(_.bind(this.generateRequest, this), this.requestGenerationTime);
-        }, this), 2000);
+        }, this), 10000);
 
         createjs.Ticker.addListener(_.bind(function() {
           this.update();

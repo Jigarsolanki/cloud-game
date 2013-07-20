@@ -8,7 +8,7 @@ define(['backbone', 'underscore'], function (Backbone, Un) {
       priority: 0,
       type: '',
       cost: 0,
-      throughputCapacity: 20,
+      throughputCapacity: 70,
       percentCapacity: 0,
       game: null
     },
@@ -41,7 +41,7 @@ define(['backbone', 'underscore'], function (Backbone, Un) {
       setInterval(_.bind(function(){
         this.updateCapacity();
       }, this), 1000);
-      
+
     }
   });
 

@@ -7,6 +7,7 @@ define(['./entity'], function (Entity) {
       this.nodes = [];
       this.set('priority', 1);
       this.set('type', 'LOADBALANCER');
+      this.set('throughputCapacity', 200);
     },
     getNextDestination: function () {
       return this.nodes[Math.round(Math.random() * (this.nodes.length - 1) )];
