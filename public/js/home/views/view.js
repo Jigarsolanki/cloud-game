@@ -28,7 +28,7 @@ define(
       entities: [],
       game: null,
       requestGenerationTime: 200,
-      sounds: null
+      sounds: null,
       initialize: function() {
         this.render();
       },
