@@ -9,6 +9,11 @@
 }
 
 #add-server {
-  background-color: green;
+  background-color: orange;
+  color: white;
+}
+
+#add-loadbalancer {
+  background-color: purple;
   color: white;
 }
