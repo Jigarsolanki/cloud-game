@@ -8,12 +8,13 @@ define(
     './loadbalancer_component',
     '../../models/request',
     '../../models/game',
+    '../../models/sounds',
     './request_component',
     'underscore',
     'toastr'
   ],
   function(Backbone, RequestContainer, Server, ServerComponent,
-    Loadbalancer, LoadbalancerComponent, Request, Game,
+    Loadbalancer, LoadbalancerComponent, Request, Game, Sounds,
     RequestComponent, underscore, toastr) {
     var View;
 
@@ -27,6 +28,7 @@ define(
       entities: [],
       game: null,
       requestGenerationTime: 200,
+      sounds: null,
       initialize: function() {
         this.render();
       },
@@ -43,6 +45,7 @@ define(
         this.game = new Game();
         this.bindBank();
         this.bindStats();
+        this.sounds = new Sounds();
         this.start();
       },
       bindButtons: function () {
@@ -134,6 +137,8 @@ define(
           });
           this.firstDestination = highestPriorityEntity;
         }
+
+        this.sounds.play('buildEntity');
       },
       removeEntity: function (removedEntity) {
         var highestPriorityEntity, highestPriorityEntityValue;
@@ -160,6 +165,8 @@ define(
           });
           this.firstDestination = highestPriorityEntity;
         }
+
+        this.sounds.play('destroyEntity');
       },
       getAllLoadbalancers: function () {
         var loadbalancers;
