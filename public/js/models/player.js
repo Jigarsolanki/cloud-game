@@ -6,7 +6,10 @@ define(['backbone'], function (Backbone) {
       money: 0
     },
     addMoney: function (money) {
-      this.money += money;
+      var newMoney;
+
+      newMoney = this.get('money') + money;
+      this.set('money', newMoney);
     }
   });
 

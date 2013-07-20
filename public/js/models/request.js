@@ -14,7 +14,7 @@ define(
       value: function () {
         var time;
 
-        time = this.timeTaken - this.timeout;
+        time = this.get('timeTaken') - this.get('timeout');
         if (time < 0) {
             return 0;
         }

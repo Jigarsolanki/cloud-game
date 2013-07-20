@@ -9,10 +9,10 @@ define(['backbone'], function (Backbone) {
       cost: 0
     },
     getCost: function () {
-      return this.time_drain * this.capacity;
+      return this.get('time_drain') * this.get('capacity');
     },
     reduceTime: function (request) {
-      this.request.timeTaken += this.timeDrain;
+      request.timeTaken += this.get('timeDrain');
     }
   });
 

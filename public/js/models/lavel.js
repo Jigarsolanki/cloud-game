@@ -4,12 +4,13 @@ define(['backbone'], function (Backbone) {
   Level = Backbone.Model.extend({
     defaults: {
       stage: 0
+      amountOfRequests: 0
     },
     initialize: function () {
-      this.amountOfRequests = this.generateRequests();
+      this.set('amountOfRequests', this.generateRequests());
     },
     generateRequests: function () {
-      return this.stage * 10;
+      return this.get('stage') * 10;
     }
   });
 
