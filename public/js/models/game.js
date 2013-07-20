@@ -3,7 +3,7 @@ define(['backbone'], function (Backbone) {
 
   Game = Backbone.Model.extend({
     defaults: {
-      money: 5000,
+      money: 100,
       totalRequests: 0,
       totalDropped: 0
     },
