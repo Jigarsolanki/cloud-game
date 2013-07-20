@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>User Name</title>
+    <title>Cloud: The Game</title>
     <script data-main="/public/js/main" src="public/js/external/require.js"></script>
     <link type="text/css" rel="stylesheet" href="public/css/interface.css">
     <link type="text/css" rel="stylesheet" href="public/css/external/toastr.min.css">
@@ -9,8 +9,22 @@
   <body>
     <canvas id="canvas" style="background-color: black;"></canvas>
     <div id="user-interface">
+      <div id="stats">
+        <div>
+          <span>Requests: </span>
+          <span id="total-requests">0</span>
+        </div>
+        <div>
+          <span>Dropped: </span>
+          <span id="total-dropped">0</span>
+        </div>
+        <div>
+          <span>% Dropped:</span>
+          <span id="percent-dropped">0</span>%
+        </div>
+      </div>
       <div id="bank">
-        <span>Bank:</span>
+        <span>Bank: </span>
         <span id="money"></span>
       </div>
       <button id="add-server">Add Server</button>

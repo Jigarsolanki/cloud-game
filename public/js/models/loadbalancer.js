@@ -9,7 +9,7 @@ define(['./entity'], function (Entity) {
       this.set('type', 'LOADBALANCER');
     },
     getNextDestination: function () {
-      return this.nodes[Math.round(Math.random() * this.nodes.length)];
+      return this.nodes[Math.round(Math.random() * (this.nodes.length - 1) )];
     },
     addNode: function (newNode) {
       this.nodes.push(newNode);

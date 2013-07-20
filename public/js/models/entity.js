@@ -7,31 +7,32 @@ define(['backbone', 'underscore'], function (Backbone, Un) {
       y: 0,
       priority: 0,
       type: '',
-      cost: 0
+      cost: 0,
+      game: null
     },
     queue: [],
     getNextDestination: function () {
       throw ('Not Implemented!');
     },
     processRequest: function (request) {
-      this.enqueue(request);
-      request.setDestination(this);
+      request.setDestination(this.getNextDestination());
     },
     enqueue: function (request) {
-      this.queue.push(request);
+      console.log('adkjfafadljf');
+      if(this.queue.indexOf(request) === -1) {
+        this.queue.push(request);
+        request.setDestination(this);
+      }
     },
     dequeue: function () {
       var request;
 
-      request = this.queue.shift();
-      if(request) {
-        request.setDestination(this.getNextDestination());
+      if (this.queue.length >= 0) {
+        request = this.queue.shift();
+        if(request) {
+          request.setDestination(this.getNextDestination());
+        }
       }
-    },
-    start: function () {
-      setTimeout(_.bind(function() {
-        this.dequeue();
-      }, this), 200);
     }
   });
 

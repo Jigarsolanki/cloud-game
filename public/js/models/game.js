@@ -3,7 +3,9 @@ define(['backbone'], function (Backbone) {
 
   Game = Backbone.Model.extend({
     defaults: {
-      money: 5000
+      money: 5000,
+      totalRequests: 0,
+      totalDropped: 0
     },
     spend: function (amount) {
       if (amount <= this.get('money')) {

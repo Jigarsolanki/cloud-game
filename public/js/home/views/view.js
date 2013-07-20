@@ -25,6 +25,7 @@ define(
       firstDestination: null,
       requestComponents: [],
       entities: [],
+      game: null,
       initialize: function() {
         this.render();
       },
@@ -40,6 +41,7 @@ define(
         this.bindButtons();
         this.game = new Game();
         this.bindBank();
+        this.bindStats();
         this.start();
       },
       bindButtons: function () {
@@ -67,10 +69,15 @@ define(
           $('#money').text(value);
         });
       },
+      bindStats: function () {
+        this.game.on("change:totalRequests", function (model, value) {
+          $('#total-requests').text(value);
+        });
+      },
       addServer: function () {
         var server, serverComponent, allLoadbalancers;
 
-        server = new Server({ x: 600, y: this.canvas.height * Math.random(), cost: 100 });
+        server = new Server({ x: 600, y: this.canvas.height * Math.random(), cost: 100, game: this.game });
 
         if (this.game.spend(server.get('cost'))) {
           serverComponent = new ServerComponent({model: server, stage: this.stage});
@@ -110,7 +117,6 @@ define(
         highestPriorityEntityValue = 0;
 
         this.entities.push(newEntity);
-        newEntity.start();
 
         if (this.entities.length === 1) {
           this.firstDestination = newEntity;
@@ -167,6 +173,7 @@ define(
         request.setDestination(this.firstDestination);
         requestComponent = new RequestComponent({model: request, requestContainer: this.requestContainer});
         this.requestComponents.push(requestComponent);
+        this.game.set({'totalRequests': this.game.get('totalRequests') + 1});
       },
       update: function () {
         var x, y;
