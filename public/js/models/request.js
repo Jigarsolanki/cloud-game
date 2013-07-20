@@ -35,7 +35,10 @@ define(
         var currentTime;
 
         currentTime = new Date().getTime();
-        return ((currentTime - this.get('startTime')) > 10000)
+        return ((currentTime - this.get('startTime')) > 10000);
+      },
+      complete: function () {
+
       }
     });
 
