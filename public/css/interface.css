@@ -1,0 +1,14 @@
+#user-interface {
+  position: absolute;
+  display: inline;
+  margin-left: 15px;
+}
+
+#bank {
+  font-weight: bold;
+}
+
+#add-server {
+  background-color: green;
+  color: white;
+}
