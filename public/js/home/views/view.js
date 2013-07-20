@@ -37,10 +37,10 @@ define(
         this.start();
       },
       bindButtons: function () {
-        $('#add_server').on('click', _.bind(function () {
+        $('#add-server').on('click', _.bind(function () {
           this.addServer();
         }, this));
-        $('#add_loadbalancer').on('click', _.bind(function () {
+        $('#add-loadbalancer').on('click', _.bind(function () {
           this.addLoadbalancer();
         }, this));
       },
@@ -62,6 +62,8 @@ define(
 
         loadbalancer = new Loadbalancer({ x: 400, y: this.canvas.height * Math.random() });
         loadbalancerComponent = new LoadbalancerComponent({model: loadbalancer, stage: this.stage});
+
+        loadbalancer.addNodes(this.getAllServers());
 
         loadbalancer.addNodes(this.getAllServers());
         this.addEntity(loadbalancer);

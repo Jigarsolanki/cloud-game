@@ -3,10 +3,17 @@
   <head>
     <title>User Name</title>
     <script data-main="/public/js/main" src="public/js/external/require.js"></script>
+    <link type="text/css" rel="stylesheet" href="public/css/interface.css">
   </head>
   <body>
     <canvas id="canvas" style="background-color: black;"></canvas>
-    <button id="add_server">Add Server</button>
-    <button id="add_loadbalancer">Add Loadbalancer</button>
+    <div id="user-interface">
+      <div id="bank">
+        <span>Bank:</span>
+        <span id="money"></span>
+      </div>
+      <button id="add-server">Add Server</button>
+      <button id="add-loadbalancer">Add Loadbalancer</button>
+    </div>
   </body>
 </html>

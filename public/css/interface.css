@@ -1,0 +1,19 @@
+#user-interface {
+  position: absolute;
+  display: inline;
+  margin-left: 15px;
+}
+
+#bank {
+  font-weight: bold;
+}
+
+#add-server {
+  background-color: orange;
+  color: white;
+}
+
+#add-loadbalancer {
+  background-color: purple;
+  color: white;
+}
