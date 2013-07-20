@@ -12,3 +12,22 @@
   background-color: green;
   color: white;
 }
+
+#selected {
+    font-weight: bold;
+    margin-top: 200px;
+}
+
+
+#upgrade-1, #upgrade-2 {
+  background-color: green;
+  color: white;
+  width:150px;
+}
+
+
+#delete {
+  background-color: red;
+  color: white;
+  width:150px;
+}
