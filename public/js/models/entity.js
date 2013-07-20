@@ -6,8 +6,11 @@ define(['backbone'], function (Backbone) {
       x: 0,
       y: 0
     },
+    getNextDestination: function () {
+      throw ('Not Implemented!');
+    },
     processRequest: function (request) {
-      //Do something
+      request.setDestination(this.getNextDestination());
     }
   });
 

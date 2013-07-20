@@ -4,11 +4,13 @@ define(
     './request_container',
     '../../models/server',
     './server_component',
+    '../../models/loadbalancer',
+    './loadbalancer_component',
     '../../models/request',
     './request_component',
     'underscore'
   ],
-  function(Backbone, RequestContainer, Server, ServerComponent, Request, RequestComponent, underscore) {
+  function(Backbone, RequestContainer, Server, ServerComponent, Loadbalancer, LoadbalancerComponent, Request, RequestComponent, underscore) {
     var View;
 
     View = Backbone.View.extend({
@@ -30,10 +32,18 @@ define(
 
         this.requestContainer = new RequestContainer({ stage: this.stage }).get();
 
-        server1 = new Server({x: 400, y: 200});
+        server1 = new Server({ x: 400, y: 200 });
         serverComponent1 = new ServerComponent({model: server1, stage: this.stage});
 
-        this.firstDestination = server1;
+        lb1 = new Loadbalancer({ x: 200, y: 200 });
+        lb1.addNode(server1);
+        lbComponent1 = new LoadbalancerComponent({ model: lb1, stage: this.stage });
+
+        this.firstDestination = lb1;
+
+        this.start();
+      },
+      start: function () {
         this.particleTimer = setInterval(_.bind(function () {
           this.addRequest();
         }, this), 200);

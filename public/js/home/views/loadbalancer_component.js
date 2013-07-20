@@ -3,9 +3,9 @@ define(
     './entity_component'
   ],
   function(EntityComponent) {
-    var ServerComponent;
+    var LoadbalancerComponent;
 
-    ServerComponent = EntityComponent.extend({
+    LoadbalancerComponent = EntityComponent.extend({
       intImage: function() {
         this.image = new Image();
         this.image.onload = _.bind(this.onLoaded, this);
@@ -14,6 +14,6 @@ define(
       }
     });
 
-    return ServerComponent;
+    return LoadbalancerComponent;
   }
 );

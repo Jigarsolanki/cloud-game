@@ -4,9 +4,6 @@ define(['./entity'], function (Entity) {
   Server = Entity.extend({
     getNextDestination: function () {
       return null;
-    },
-    processRequest: function (request) {
-      request.setDestination(this.getNextDestination());
     }
   });
 
