@@ -7,31 +7,40 @@ define(['backbone', 'underscore'], function (Backbone, Un) {
       y: 0,
       priority: 0,
       type: '',
-      cost: 0
+      cost: 0,
+      currentCapacity: 0,
+      throughputCapacity: 20
     },
-    queue: [],
+    requestsLastMinute: [],
     getNextDestination: function () {
       throw ('Not Implemented!');
     },
     processRequest: function (request) {
       request.setDestination(this.getNextDestination());
+      this.requestsLastMinute.push({req: request, time: new Date().getTime()});
     },
-    enqueue: function (request) {
-      console.log('adkjfafadljf');
-      if(this.queue.indexOf(request) === -1) {
-        this.queue.push(request);
-        request.setDestination(this);
-      }
-    },
-    dequeue: function () {
-      var request;
+    updateCapacity: function () {
+      var indexOfTooOld = -1;
+      var currentTime = new Date().getTime();
 
-      if (this.queue.length >= 0) {
-        request = this.queue.shift();
-        if(request) {
-          request.setDestination(this.getNextDestination());
+      for (var i = 0; i < this.requestsLastMinute.length; i++) {
+        if (currentTime - this.requestsLastMinute[i].time > 5000) {
+          indexOfTooOld = i;
         }
+      };
+
+      if (indexOfTooOld > -1) {
+        this.requestsLastMinute.splice(0, indexOfTooOld);
       }
+
+      this.set('currentCapacity', this.requestsLastMinute.length);
+    },
+    start: function () {
+      setInterval(_.bind(function(){
+        this.updateCapacity();
+        console.log(this.requestsLastMinute);
+      }, this), 1000);
+      
     }
   });
 

@@ -116,6 +116,7 @@ define(
         highestPriorityEntityValue = 0;
 
         this.entities.push(newEntity);
+        newEntity.start();
 
         if (this.entities.length === 1) {
           this.firstDestination = newEntity;
