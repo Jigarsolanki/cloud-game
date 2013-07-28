@@ -17,12 +17,17 @@
   margin-bottom: 15px;
 }
 
-.resource_image {
+.resource-image {
   height: 79px;
   width: 100px;
   background-repeat: no-repeat;
   display: inline-block;
-  margin: 20px 20px 0px 0px;
+  margin: 18px 18px 0px 0px;
+  border: 2px solid rgba(255, 0, 0, .0);
+}
+
+.selected-resource {
+  border: 2px solid gold;
 }
 
 #add-server {

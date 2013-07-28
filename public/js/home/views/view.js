@@ -19,6 +19,11 @@ define(
     var View;
 
     View = Backbone.View.extend({
+      Resources: {
+        'SERVER': 'addServer',
+        'LOADBALANCER': 'addLoadbalancer'
+      },
+
       canvas: null,
       stage: null,
       requestContainer: null,
@@ -29,6 +34,7 @@ define(
       game: null,
       requestGenerationTime: 200,
       sounds: null,
+      selectedResource: null,
       initialize: function() {
         this.render();
       },
@@ -50,10 +56,17 @@ define(
       },
       bindButtons: function () {
         $('#add-server').on('click', _.bind(function () {
-          this.addServer();
+          this.selectedResource = this.Resources.SERVER;
+          $('.selected-resource').removeClass('selected-resource');
+          $('#add-server').addClass('selected-resource');
         }, this));
         $('#add-loadbalancer').on('click', _.bind(function () {
-          this.addLoadbalancer();
+          this.selectedResource = this.Resources.LOADBALANCER;
+          $('.selected-resource').removeClass('selected-resource');
+          $('#add-loadbalancer').addClass('selected-resource');
+        }, this));
+        $('#buy-resource').on('click', _.bind(function () {
+          this.buy(this.selectedResource);
         }, this));
         $('#upgrade-1').on('click', _.bind(function () {
           //TODO
@@ -80,6 +93,9 @@ define(
         this.game.on("change:totalRequests", function (model, value) {
           $('#total-requests').text(value);
         });
+      },
+      buy: function (resourceToBuy) {
+        this[resourceToBuy]();
       },
       addServer: function () {
         var server, serverComponent, allLoadbalancers;
