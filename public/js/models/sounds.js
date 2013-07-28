@@ -18,7 +18,7 @@ define(
 
         sound = this.get('types')[soundName];
         sound.currentTime = 0;
-        sound.play();
+        //sound.play();
       }
     });
 

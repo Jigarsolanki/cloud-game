@@ -27,14 +27,17 @@
         <span>Bank: $</span>
         <span id="money"></span>
       </div>
-      <button id="add-server">Add Server ($100)</button>
-      <button id="add-loadbalancer">Add Loadbalancer ($125)</button>
+      <div class="resource_selector">
+        <div id="add-server" class="resource_image"></div>
+        <div id="add-loadbalancer" class="resource_image"></div>
+      </div>
       <div id="selected">
         <div>Available Actions:</div>
         <span id="options">
-          <button id="upgrade-1">Upgrade 1</button><br />
-          <button id="upgrade-2">Upgrade 2</button><br />
-          <button id="delete">Delete Server</button>
+          <button id="buy-resource" class="resource-action">Buy!</button>
+          <button id="upgrade-1" class="resource-action">Upgrade 1</button>
+          <button id="upgrade-2" class="resource-action">Upgrade 2</button>
+          <button id="delete" class="resource-action">Delete Server</button>
         </span>
       </div>
     </div>

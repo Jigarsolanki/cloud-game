@@ -17,34 +17,41 @@
   margin-bottom: 15px;
 }
 
-#add-server, #add-loadbalancer {
-  color: white;
-  font-weight: bold;
+.resource_image {
+  height: 79px;
+  width: 100px;
+  background-repeat: no-repeat;
+  display: inline-block;
+  margin: 20px 20px 0px 0px;
 }
 
 #add-server {
-  background-color: #FF8800;
+  background-image: url('/public/images/cloud_server.png');
 }
 
 #add-loadbalancer {
-  background-color: purple;
+  background-image: url('/public/images/cloud_lb.png');
 }
 
 #selected {
-    font-weight: bold;
-    margin-top: 200px;
+  font-weight: bold;
+  margin-top: 200px;
 }
 
+.resource-action {
+  color: white;
+  font-weight: bold;
+  width: 150px;
+}
+
+#buy-resource {
+  background-color: green;
+}
 
 #upgrade-1, #upgrade-2 {
   background-color: #5e5e5e;
-  color: #aaa;
-  width:150px;
 }
-
 
 #delete {
   background-color: red;
-  color: white;
-  width:150px;
 }

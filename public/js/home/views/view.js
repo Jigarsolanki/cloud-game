@@ -105,18 +105,24 @@ define(
       addLoadbalancer: function () {
         var loadbalancer, loadbalancerComponent, servers;
 
-        loadbalancer = new Loadbalancer({ x: 400, y: this.canvas.height * Math.random(), cost: 125 });
-
-        if (this.game.spend(loadbalancer.get('cost'))) {
-          loadbalancerComponent = new LoadbalancerComponent({model: loadbalancer, stage: this.stage});
-
-          loadbalancer.addNodes(this.getAllServers());
-
-          loadbalancer.addNodes(this.getAllServers());
-          this.addEntity(loadbalancer);
-        } else {
-          toastr.error('Not enough money to buy a loadbalancer!');
+        if (!this.getAllServers().length) {
+          toastr.error('You must create a server first!')
         }
+        else {
+          loadbalancer = new Loadbalancer({ x: 400, y: this.canvas.height * Math.random(), cost: 125 });
+
+          if (this.game.spend(loadbalancer.get('cost'))) {
+            loadbalancerComponent = new LoadbalancerComponent({model: loadbalancer, stage: this.stage});
+
+            loadbalancer.addNodes(this.getAllServers());
+
+            loadbalancer.addNodes(this.getAllServers());
+            this.addEntity(loadbalancer);
+          } else {
+            toastr.error('Not enough money to buy a loadbalancer!');
+          }
+        }
+
       },
       addEntity: function (newEntity) {
         var highestPriorityEntity, highestPriorityEntityValue;
@@ -201,7 +207,8 @@ define(
         var requestGenerationTimer;
 
         requestGenerationTimer = setInterval(_.bind(function () {
-          if(this.particleTimer) {
+
+          if(this.particleTimer && this.getAllServers().length > 0) {
             clearInterval(this.particleTimer);
             this.requestGenerationTime -= 5;
           }
